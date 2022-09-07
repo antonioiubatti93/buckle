@@ -4,8 +4,8 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/antonioiubatti93/buckle/pkg/person"
 	v2 "github.com/antonioiubatti93/buckle/pkg/person/v2"
+	"github.com/antonioiubatti93/buckle/sdk/person"
 )
 
 func main() {
