@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 
+	v0 "github.com/antonioiubatti93/buckle/pkg/person"
 	v2 "github.com/antonioiubatti93/buckle/pkg/person/v2"
 	"github.com/antonioiubatti93/buckle/sdk/person"
 )
@@ -14,6 +15,8 @@ func main() {
 	flag.Parse()
 
 	fmt.Println("base:", person.New(*name, *age))
+
+	fmt.Println("v0:", v0.New(*name, *age))
 
 	fmt.Println("v2:", v2.New(
 		v2.WithName(*name),
