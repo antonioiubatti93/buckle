@@ -1,3 +1,5 @@
+github.com/antonioiubatti93/buckle/pkg/person v0.0.0 h1:r+6JhdQbgNLrNvg8BmMxBd+hylMzgr9KplovNjEnIxI=
+github.com/antonioiubatti93/buckle/pkg/person v0.0.0/go.mod h1:4hJeOQ3AsOUsEgmXT9UuJJaNzcjWRKsOInTXzEV4zp0=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/stretchr/testify v1.8.0 h1:pSgiaMZlXftHpm5L7V1+rVB+AZJydKsMxsQBIJw4PKk=
