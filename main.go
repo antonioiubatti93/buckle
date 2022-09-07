@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/antonioiubatti93/buckle/pkg/person"
+	v2 "github.com/antonioiubatti93/buckle/pkg/person/v2"
 )
 
 func main() {
@@ -12,7 +13,10 @@ func main() {
 	age := flag.Int("age", 0, "person age")
 	flag.Parse()
 
-	p := person.New(*name, *age)
+	fmt.Println("base:", person.New(*name, *age))
 
-	fmt.Println(p)
+	fmt.Println("v2:", v2.New(
+		v2.WithName(*name),
+		v2.WithAge(*age),
+	))
 }
