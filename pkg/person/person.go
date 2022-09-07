@@ -7,6 +7,8 @@ type Person struct {
 	age  int
 }
 
+var _ fmt.Stringer = Person{}
+
 func New(name string, age int) *Person {
 	return &Person{
 		name: name,

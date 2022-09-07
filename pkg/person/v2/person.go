@@ -7,6 +7,8 @@ type Person struct {
 	age  int
 }
 
+var _ fmt.Stringer = Person{}
+
 func (p Person) String() string {
 	return fmt.Sprintf("name: %s, age: %d", p.name, p.age)
 }

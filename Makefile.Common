@@ -1,0 +1,24 @@
+GO ?= go
+GOTEST ?= $(GO) test
+
+MODULE_COVERAGE_OUT := module_coverage.out
+TEST_REPORT ?= bin/junit.xml
+TEST_FLAGS = -race -tags=integration -coverprofile=bin/$(MODULE_COVERAGE_OUT)
+GOTESTSUM_FLAGS = --format testname --junitfile $(TEST_REPORT)
+
+.PHONY: module-fmt
+module-fmt:
+	$(GO) mod tidy
+	gofumpt -w .
+
+.PHONY: module-test
+module-test:
+	mkdir -p bin
+	gotestsum $(GOTESTSUM_FLAGS) -- $(TEST_FLAGS) ./...
+
+.PHONY: reporting-tools
+reporting-tools:
+	$(GO) install github.com/AlekSi/gocov-xml@latest
+	$(GO) install github.com/axw/gocov/gocov@latest
+	$(GO) install gotest.tools/gotestsum@latest
+	$(GO) install github.com/wadey/gocovmerge@latest
