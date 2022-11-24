@@ -60,3 +60,11 @@ merge-coverage:
 .PHONY: dev-tools
 dev-tools:
 	$(GO) install mvdan.cc/gofumpt@latest
+
+# Tag creates and pushes a tag to the remote.
+# It takes two arguments TAG and MSG to be specified
+# by command line.
+
+tag:
+	git tag -s -a $$TAG -m "$$MSG"
+	git push origin refs/tags/$$TAG

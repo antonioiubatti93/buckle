@@ -10,7 +10,7 @@ replace (
 require (
 	github.com/antonioiubatti93/buckle/pkg/person v0.0.0
 	github.com/antonioiubatti93/buckle/pkg/person/v2 v2.0.0
-	github.com/antonioiubatti93/buckle/sdk/person v0.0.0
+	github.com/antonioiubatti93/buckle/sdk/person v0.0.1
 	github.com/stretchr/testify v1.8.0
 )
 
