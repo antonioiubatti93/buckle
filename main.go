@@ -8,6 +8,10 @@ import (
 	"github.com/antonioiubatti93/buckle/termstructure"
 )
 
+func priceZeroCouponBond(ir *interestrate.InterestRate, notional, yf float64) float64 {
+	return notional * ir.DiscountAt(yf)
+}
+
 func main() {
 	fmt.Println("Application: price a zero-coupon bond")
 
@@ -23,5 +27,6 @@ func main() {
 	fmt.Printf("notional: %0.3f\n", *notional)
 	fmt.Printf("interest rate: %0.3f%%\n", *rate*100.0)
 	fmt.Printf("maturity: %d years\n", *maturity)
-	fmt.Printf("price: %0.3f\n", *notional*ir.DiscountAt(yf))
+
+	fmt.Printf("price: %0.6f\n", priceZeroCouponBond(ir, *notional, yf))
 }
