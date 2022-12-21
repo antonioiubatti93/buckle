@@ -10,7 +10,7 @@ replace (
 
 require (
 	github.com/antonioiubatti93/buckle/interestrate v0.0.0
-	github.com/antonioiubatti93/buckle/pricing v0.0.0-00010101000000-000000000000
+	github.com/antonioiubatti93/buckle/pricing v0.0.0
 	github.com/antonioiubatti93/buckle/termstructure v0.0.0
 )
 
