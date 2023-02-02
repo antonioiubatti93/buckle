@@ -4,6 +4,8 @@ import (
 	"math"
 	"testing"
 
+	"github.com/antonioiubatti93/buckle/concepts"
+	"github.com/antonioiubatti93/buckle/concepts/test"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -15,11 +17,11 @@ func Test_Compute(t *testing.T) {
 		tol = 1.0e-15
 	)
 
-	ts := newTermStructure(0.01)
+	ts := test.New(0.01)
 
 	for _, tc := range []struct {
 		name     string
-		f        floating
+		f        concepts.FloatingRate
 		expected float64
 	}{
 		{

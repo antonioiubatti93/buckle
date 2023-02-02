@@ -1,4 +1,4 @@
-package termstructure
+package test
 
 import "github.com/antonioiubatti93/buckle/concepts"
 
@@ -10,6 +10,6 @@ func (c Constant) Value(_ float64) float64 {
 	return float64(c)
 }
 
-func NewConstant(c float64) Constant {
+func New(c float64) Constant {
 	return Constant(c)
 }

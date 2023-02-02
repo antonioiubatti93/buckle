@@ -4,20 +4,9 @@ import (
 	"math"
 	"testing"
 
+	"github.com/antonioiubatti93/buckle/concepts/test"
 	"github.com/stretchr/testify/assert"
 )
-
-type termStructure float64
-
-var _ TermStructure = termStructure(0.0)
-
-func (t termStructure) Value(_ float64) float64 {
-	return float64(t)
-}
-
-func newTermStructure(c float64) termStructure {
-	return termStructure(c)
-}
 
 func Test_InterestRate(t *testing.T) {
 	t.Parallel()
@@ -28,7 +17,7 @@ func Test_InterestRate(t *testing.T) {
 		tol  = 1.0e-15
 	)
 
-	ir := New(newTermStructure(rate))
+	ir := New(test.New(rate))
 
 	assert.InDelta(t, rate, ir.Spot(yf), tol)
 	assert.InDelta(t, math.Exp(-rate), ir.Discount(yf), tol)

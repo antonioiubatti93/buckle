@@ -1,15 +1,19 @@
 package rate
 
-import "math"
+import (
+	"math"
+
+	"github.com/antonioiubatti93/buckle/concepts"
+)
 
 type Forward struct {
-	ts          TermStructure
+	ts          concepts.TermStructure
 	horizon     float64
 	spread      float64
 	compounding Compounding
 }
 
-var _ floating = Forward{}
+var _ concepts.FloatingRate = Forward{}
 
 func (f Forward) Compute(yf float64) float64 {
 	yfStart, yfEnd := yf, yf+f.horizon
@@ -63,7 +67,7 @@ func applyOpts(f Forward, opts ...ForwardOption) Forward {
 	return f
 }
 
-func NewForward(ts TermStructure, opts ...ForwardOption) Forward {
+func NewForward(ts concepts.TermStructure, opts ...ForwardOption) Forward {
 	f := Forward{
 		ts: ts,
 	}

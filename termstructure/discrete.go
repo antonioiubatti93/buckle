@@ -3,6 +3,7 @@ package termstructure
 import (
 	"fmt"
 
+	"github.com/antonioiubatti93/buckle/concepts"
 	interp "github.com/edgelaboratories/interpolator"
 )
 
@@ -14,7 +15,7 @@ type Discrete struct {
 	interpolator interpolator
 }
 
-var _ termStructure = Discrete{}
+var _ concepts.TermStructure = Discrete{}
 
 func (d Discrete) Value(yf float64) float64 {
 	return d.interpolator.Value(yf)
