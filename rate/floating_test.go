@@ -4,8 +4,8 @@ import (
 	"math"
 	"testing"
 
-	"github.com/antonioiubatti93/buckle/concepts"
-	"github.com/antonioiubatti93/buckle/concepts/test"
+	"github.com/antonioiubatti93/buckle/curve"
+	"github.com/antonioiubatti93/buckle/curve/test"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -21,7 +21,7 @@ func Test_Compute(t *testing.T) {
 
 	for _, tc := range []struct {
 		name     string
-		f        concepts.FloatingRate
+		f        curve.FloatingRate
 		expected float64
 	}{
 		{

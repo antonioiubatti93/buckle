@@ -3,7 +3,7 @@ package termstructure
 import (
 	"testing"
 
-	"github.com/antonioiubatti93/buckle/concepts"
+	"github.com/antonioiubatti93/buckle/curve"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -25,7 +25,7 @@ func Test_termStructure_Value(t *testing.T) {
 
 	for _, tc := range []struct {
 		name     string
-		ts       concepts.TermStructure
+		ts       curve.TermStructure
 		expected float64
 	}{
 		{

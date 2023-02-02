@@ -3,11 +3,11 @@ package interestrate
 import (
 	"math"
 
-	"github.com/antonioiubatti93/buckle/concepts"
+	"github.com/antonioiubatti93/buckle/curve"
 )
 
 type InterestRate struct {
-	ts concepts.TermStructure
+	ts curve.TermStructure
 }
 
 func (ir InterestRate) Spot(yf float64) float64 {
@@ -22,7 +22,7 @@ func (ir InterestRate) Capitalize(yf float64) float64 {
 	return 1.0 / ir.Discount(yf)
 }
 
-func New(ts concepts.TermStructure) InterestRate {
+func New(ts curve.TermStructure) InterestRate {
 	return InterestRate{
 		ts: ts,
 	}

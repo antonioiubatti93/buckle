@@ -4,7 +4,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/antonioiubatti93/buckle/concepts/test"
+	"github.com/antonioiubatti93/buckle/curve/test"
 	"github.com/stretchr/testify/assert"
 )
 
