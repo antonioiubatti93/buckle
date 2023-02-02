@@ -48,6 +48,11 @@ func Test_termStructure_Value(t *testing.T) {
 			),
 			0.015,
 		},
+		{
+			"linear",
+			NewLinear(0.01, 0.01),
+			0.02,
+		},
 	} {
 		tc := tc
 
