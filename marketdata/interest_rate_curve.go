@@ -31,12 +31,12 @@ func (c *InterestRateCurve) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func newInterestRateCurve(dataPoints map[Tenor]float64) (InterestRateCurve, error) {
+func newDiscreteTermStructure(dataPoints map[Tenor]float64) (termstructure.Discrete, error) {
 	tenorValues := make([]termstructure.TenorValue, 0, len(dataPoints))
 	for tenor, value := range dataPoints {
 		yf, err := tenor.YearFraction()
 		if err != nil {
-			return InterestRateCurve{}, fmt.Errorf("could not interpret tenor: %w", err)
+			return termstructure.Discrete{}, fmt.Errorf("could not interpret tenor: %w", err)
 		}
 
 		tenorValues = append(tenorValues, termstructure.NewTenorValue(yf, value))
@@ -44,7 +44,16 @@ func newInterestRateCurve(dataPoints map[Tenor]float64) (InterestRateCurve, erro
 
 	discrete, err := termstructure.NewDiscrete(tenorValues...)
 	if err != nil {
-		return InterestRateCurve{}, fmt.Errorf("could not build discrete term structure: %w", err)
+		return termstructure.Discrete{}, fmt.Errorf("could not build discrete term structure: %w", err)
+	}
+
+	return discrete, nil
+}
+
+func newInterestRateCurve(dataPoints map[Tenor]float64) (InterestRateCurve, error) {
+	discrete, err := newDiscreteTermStructure(dataPoints)
+	if err != nil {
+		return InterestRateCurve{}, err
 	}
 
 	return InterestRateCurve{
