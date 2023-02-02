@@ -17,7 +17,7 @@ func Test_Compute(t *testing.T) {
 		tol = 1.0e-15
 	)
 
-	ts := test.New(0.01)
+	ts := test.NewTermStructure(0.01)
 
 	for _, tc := range []struct {
 		name     string

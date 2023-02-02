@@ -10,6 +10,6 @@ func (c Constant) Value(_ float64) float64 {
 	return float64(c)
 }
 
-func New(c float64) Constant {
+func NewTermStructure(c float64) Constant {
 	return Constant(c)
 }

@@ -17,7 +17,7 @@ func Test_InterestRate(t *testing.T) {
 		tol  = 1.0e-15
 	)
 
-	ir := New(test.New(rate))
+	ir := New(test.NewTermStructure(rate))
 
 	assert.InDelta(t, rate, ir.Spot(yf), tol)
 	assert.InDelta(t, math.Exp(-rate), ir.Discount(yf), tol)
