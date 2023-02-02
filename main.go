@@ -7,27 +7,24 @@ import (
 
 	"github.com/antonioiubatti93/buckle/interestrate"
 	"github.com/antonioiubatti93/buckle/marketdata"
-	"github.com/antonioiubatti93/buckle/rate"
-	"github.com/antonioiubatti93/buckle/termstructure"
 )
 
 func main() {
-	ts, err := termstructure.NewDiscrete(
-		termstructure.NewTenorValue(1.0/365.0, 0.01),
-		termstructure.NewTenorValue(1.0/12.0, 0.21),
-		termstructure.NewTenorValue(1.0, 0.03),
-	)
-	if err != nil {
+	var rate marketdata.FloatingRateCurve
+	if err := json.Unmarshal([]byte(`{
+		"termStructure": {
+			"ON": 0.01,
+			"M1": 0.21,
+			"Y1": 0.03
+		},
+		"horizon": "Y1",
+		"spread": 0.01,
+		"compounding": "Simple"
+	}`), &rate); err != nil {
 		log.Fatal(err)
 	}
 
-	rate := rate.NewForward(ts,
-		rate.WithCompounding(rate.Simple),
-		rate.WithHorizon(1.0),
-		rate.WithSpread(0.01),
-	)
-
-	fmt.Println("forward rate at 1y:", rate.Compute(1.0))
+	fmt.Println("forward rate at 1y:", rate.FloatingRate().Compute(1.0))
 
 	var curve marketdata.InterestRateCurve
 	if err := json.Unmarshal([]byte(`{
