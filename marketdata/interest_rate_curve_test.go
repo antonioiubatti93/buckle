@@ -12,7 +12,7 @@ func Test_InterestRateCurve_UnmarshalJSON(t *testing.T) {
 	t.Parallel()
 
 	var c InterestRateCurve
-	assert.NoError(t, json.Unmarshal([]byte(`{
+	require.NoError(t, json.Unmarshal([]byte(`{
 		"M1": 0.01,
 		"Y1": 0.02,
 		"Y10": 0.03
