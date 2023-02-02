@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/antonioiubatti93/buckle/interestrate"
 	"github.com/antonioiubatti93/buckle/rate"
 	"github.com/antonioiubatti93/buckle/termstructure"
 )
@@ -25,4 +26,8 @@ func main() {
 	)
 
 	fmt.Println("forward rate at 1y:", rate.Compute(1.0))
+
+	ir := interestrate.New(termstructure.NewConstant(0.01))
+
+	fmt.Println("discount at 1y:", ir.Discount(1.0))
 }
