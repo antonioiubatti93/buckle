@@ -17,6 +17,12 @@ const (
 
 type FloatingRateCurve struct {
 	curve.FloatingRate
+
+	spread float64
+}
+
+func (c FloatingRateCurve) Spread() float64 {
+	return c.spread
 }
 
 func (f *FloatingRateCurve) UnmarshalJSON(data []byte) error {
@@ -46,7 +52,8 @@ func (f *FloatingRateCurve) UnmarshalJSON(data []byte) error {
 	}
 
 	*f = FloatingRateCurve{
-		rate.NewForward(discrete, horizon, floatingRateData.Spread, compounding),
+		rate.NewForward(discrete, horizon, compounding),
+		floatingRateData.Spread,
 	}
 
 	return nil

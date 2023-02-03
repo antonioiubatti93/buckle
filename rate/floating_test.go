@@ -26,18 +26,23 @@ func Test_Compute(t *testing.T) {
 	}{
 		{
 			"forward/continuous",
-			NewForward(ts, 1.0, 0.01, Continuous),
-			0.02,
+			NewForward(ts, 1.0, Continuous),
+			0.01,
 		},
 		{
 			"forward/simple",
-			NewForward(ts, 0.5, 0.01, Simple),
-			0.01 + (math.Exp(0.01*0.5)-1.0)/0.5,
+			NewForward(ts, 0.5, Simple),
+			(math.Exp(0.01*0.5) - 1.0) / 0.5,
 		},
 		{
 			"forward/instant",
-			NewForward(ts, 0.0, 0.0, Continuous),
+			NewForward(ts, 0.0, Continuous),
 			0.01,
+		},
+		{
+			"swap",
+			NewSwap(ts, 5.0, 1.0),
+			math.Exp(0.01) - 1.0,
 		},
 	} {
 		tc := tc

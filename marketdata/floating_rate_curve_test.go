@@ -21,6 +21,7 @@ func Test_FloatingRateData_UnmarshalJSON(t *testing.T) {
 		"compounding": "Simple",
 		"horizon": "Y5"
 	}`), &f))
+	assert.Equal(t, 0.01, f.Spread())
 }
 
 func Test_FloatingRateData_UnmarshalJSON_InvalidInput(t *testing.T) {
