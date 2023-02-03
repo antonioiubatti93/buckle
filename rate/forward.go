@@ -36,46 +36,11 @@ func (f Forward) integralContinuousRate(yfStart, yfEnd float64) float64 {
 	return f.ts.Value(yfEnd)*yfEnd - f.ts.Value(yfStart)*yfStart
 }
 
-type ForwardOption func(Forward) Forward
-
-func WithHorizon(horizon float64) ForwardOption {
-	return func(f Forward) Forward {
-		f.horizon = horizon
-		return f
+func NewForward(ts curve.TermStructure, horizon, spread float64, compounding Compounding) Forward {
+	return Forward{
+		ts:          ts,
+		horizon:     horizon,
+		spread:      spread,
+		compounding: compounding,
 	}
-}
-
-func WithSpread(spread float64) ForwardOption {
-	return func(f Forward) Forward {
-		f.spread = spread
-		return f
-	}
-}
-
-func WithCompounding(compounding Compounding) ForwardOption {
-	return func(f Forward) Forward {
-		f.compounding = compounding
-		return f
-	}
-}
-
-func applyOpts(f Forward, opts ...ForwardOption) Forward {
-	for _, opt := range opts {
-		f = opt(f)
-	}
-
-	return f
-}
-
-func NewForward(ts curve.TermStructure, opts ...ForwardOption) Forward {
-	f := Forward{
-		ts: ts,
-	}
-	f = applyOpts(f,
-		WithSpread(0.0),
-		WithHorizon(1.0),
-		WithCompounding(Continuous),
-	)
-
-	return applyOpts(f, opts...)
 }

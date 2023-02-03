@@ -46,11 +46,7 @@ func (f *FloatingRateCurve) UnmarshalJSON(data []byte) error {
 	}
 
 	*f = FloatingRateCurve{
-		rate.NewForward(discrete,
-			rate.WithCompounding(compounding),
-			rate.WithSpread(floatingRateData.Spread),
-			rate.WithHorizon(horizon),
-		),
+		rate.NewForward(discrete, horizon, floatingRateData.Spread, compounding),
 	}
 
 	return nil

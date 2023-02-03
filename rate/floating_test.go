@@ -26,27 +26,17 @@ func Test_Compute(t *testing.T) {
 	}{
 		{
 			"forward/continuous",
-			NewForward(ts,
-				WithCompounding(Continuous),
-				WithSpread(0.01),
-				WithHorizon(1.0),
-			),
+			NewForward(ts, 1.0, 0.01, Continuous),
 			0.02,
 		},
 		{
 			"forward/simple",
-			NewForward(ts,
-				WithCompounding(Simple),
-				WithSpread(0.01),
-				WithHorizon(0.5),
-			),
+			NewForward(ts, 0.5, 0.01, Simple),
 			0.01 + (math.Exp(0.01*0.5)-1.0)/0.5,
 		},
 		{
 			"forward/instant",
-			NewForward(ts,
-				WithHorizon(0.0),
-			),
+			NewForward(ts, 0.0, 0.0, Continuous),
 			0.01,
 		},
 	} {
