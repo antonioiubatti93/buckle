@@ -1,4 +1,4 @@
-package interestrate
+package marketstate
 
 import (
 	"math"
@@ -22,12 +22,12 @@ func (ir InterestRate) Capitalize(yf float64) float64 {
 	return 1.0 / ir.Discount(yf)
 }
 
-func New(ts curve.TermStructure) InterestRate {
+func NewInterestRate(ts curve.TermStructure) InterestRate {
 	return InterestRate{
 		ts: ts,
 	}
 }
 
 func (ir InterestRate) Shift(shift float64) InterestRate {
-	return New(curve.ShiftTermStructure(ir.ts, shift))
+	return NewInterestRate(curve.ShiftTermStructure(ir.ts, shift))
 }

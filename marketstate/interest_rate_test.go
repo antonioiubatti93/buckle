@@ -1,4 +1,4 @@
-package interestrate
+package marketstate
 
 import (
 	"math"
@@ -17,7 +17,7 @@ func Test_InterestRate(t *testing.T) {
 		tol  = 1.0e-15
 	)
 
-	ir := New(test.NewTermStructure(rate))
+	ir := NewInterestRate(test.NewTermStructure(rate))
 
 	assert.InDelta(t, rate, ir.Spot(yf), tol)
 	assert.InDelta(t, math.Exp(-rate), ir.Discount(yf), tol)
@@ -34,7 +34,7 @@ func Test_InterestRate_Shift(t *testing.T) {
 		tol   = 1.0e-15
 	)
 
-	ir := New(test.NewTermStructure(rate))
+	ir := NewInterestRate(test.NewTermStructure(rate))
 
 	assert.InDelta(t, rate+shift, ir.Shift(shift).Spot(yf), tol)
 }

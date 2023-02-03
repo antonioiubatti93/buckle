@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/antonioiubatti93/buckle/interestrate"
 	"github.com/antonioiubatti93/buckle/marketdata"
+	"github.com/antonioiubatti93/buckle/marketstate"
 )
 
 func main() {
@@ -36,7 +36,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	ir := interestrate.New(curve.TermStructure())
+	ir := marketstate.NewInterestRate(curve.TermStructure())
 
 	fmt.Println("discount at 1y:", ir.Discount(1.0))
 }
