@@ -38,7 +38,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	ir := marketstate.NewInterestRate(curve.TermStructure())
+	ir := marketstate.NewInterestRate(curve)
 
 	fmt.Println("discount at 1y:", ir.Discount(1.0))
 }

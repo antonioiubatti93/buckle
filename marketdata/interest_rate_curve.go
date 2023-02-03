@@ -8,11 +8,7 @@ import (
 )
 
 type InterestRateCurve struct {
-	termStructure curve.TermStructure
-}
-
-func (c InterestRateCurve) TermStructure() curve.TermStructure {
-	return c.termStructure
+	curve.TermStructure
 }
 
 func (c *InterestRateCurve) UnmarshalJSON(data []byte) error {
@@ -28,4 +24,15 @@ func (c *InterestRateCurve) UnmarshalJSON(data []byte) error {
 	*c = curve
 
 	return nil
+}
+
+func newInterestRateCurve(ts TermStructure) (InterestRateCurve, error) {
+	discrete, err := newDiscreteTermStructure(ts)
+	if err != nil {
+		return InterestRateCurve{}, err
+	}
+
+	return InterestRateCurve{
+		discrete,
+	}, nil
 }

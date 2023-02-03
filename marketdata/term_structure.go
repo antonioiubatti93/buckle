@@ -66,14 +66,3 @@ func newDiscreteTermStructure(ts TermStructure) (termstructure.Discrete, error) 
 
 	return discrete, nil
 }
-
-func newInterestRateCurve(ts TermStructure) (InterestRateCurve, error) {
-	discrete, err := newDiscreteTermStructure(ts)
-	if err != nil {
-		return InterestRateCurve{}, err
-	}
-
-	return InterestRateCurve{
-		termStructure: discrete,
-	}, nil
-}
