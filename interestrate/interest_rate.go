@@ -27,3 +27,7 @@ func New(ts curve.TermStructure) InterestRate {
 		ts: ts,
 	}
 }
+
+func (ir InterestRate) Shift(shift float64) InterestRate {
+	return New(curve.ShiftTermStructure(ir.ts, shift))
+}
