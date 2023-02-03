@@ -8,23 +8,29 @@ import (
 	"github.com/antonioiubatti93/buckle/rate"
 )
 
+// Compounding represents an interest rate compounding.
 type Compounding string
 
 const (
+	// Continuous means continuous compounding.
 	Continuous Compounding = "Continuous"
-	Simple     Compounding = "Simple"
+	// Simple means simple compounding.
+	Simple Compounding = "Simple"
 )
 
+// FloatingRateCurve is a floating rate with a spread.
 type FloatingRateCurve struct {
 	curve.FloatingRate
 
 	spread float64
 }
 
+// Spread returns the floating rate curve spread.
 func (c FloatingRateCurve) Spread() float64 {
 	return c.spread
 }
 
+// UnmarshalJSON deserializes a floating rate curve from JSON.
 func (f *FloatingRateCurve) UnmarshalJSON(data []byte) error {
 	var floatingRateData struct {
 		TermStructure TermStructure `json:"termStructure"`

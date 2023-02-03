@@ -7,10 +7,12 @@ import (
 	"github.com/antonioiubatti93/buckle/curve"
 )
 
+// InterestRateCurve is a term structure.
 type InterestRateCurve struct {
 	curve.TermStructure
 }
 
+// UnmarshalJSON deserializes an interest rate curve from JSON.
 func (c *InterestRateCurve) UnmarshalJSON(data []byte) error {
 	var ts map[Tenor]float64
 	if err := json.Unmarshal(data, &ts); err != nil {

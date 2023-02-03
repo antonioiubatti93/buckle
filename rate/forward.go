@@ -6,6 +6,8 @@ import (
 	"github.com/antonioiubatti93/buckle/curve"
 )
 
+// Forward represents a forward rate of some horizon
+// and given compounding.
 type Forward struct {
 	ts          curve.TermStructure
 	horizon     float64
@@ -14,6 +16,7 @@ type Forward struct {
 
 var _ curve.FloatingRate = Forward{}
 
+// Compute evaluates the forward rate at a given year fraction.
 func (f Forward) Compute(yf float64) float64 {
 	yfStart, yfEnd := yf, yf+f.horizon
 
@@ -35,6 +38,7 @@ func (f Forward) integralContinuousRate(yfStart, yfEnd float64) float64 {
 	return f.ts.Value(yfEnd)*yfEnd - f.ts.Value(yfStart)*yfStart
 }
 
+// NewForward returns a new forward rate.
 func NewForward(ts curve.TermStructure, horizon float64, compounding Compounding) Forward {
 	return Forward{
 		ts:          ts,

@@ -11,16 +11,21 @@ type interpolator interface {
 	Value(yf float64) float64
 }
 
+// Discrete is a term structure interpolated on a set
+// of discrete points with thresholded extremes.
 type Discrete struct {
 	interpolator interpolator
 }
 
 var _ curve.TermStructure = Discrete{}
 
+// Value evaluates the discrete term structure at a given year fraction.
 func (d Discrete) Value(yf float64) float64 {
 	return d.interpolator.Value(yf)
 }
 
+// NewDiscrete returns a new discrete term structure from a set of
+// tenor-value points, or an error if it is invalid.
 func NewDiscrete(tenorValues ...TenorValue) (Discrete, error) {
 	xys := convertTenorValuesToXYs(tenorValues...)
 

@@ -6,6 +6,7 @@ import (
 	"github.com/antonioiubatti93/buckle/curve"
 )
 
+// Swap represents a swap rate with given maturity and periodicity.
 type Swap struct {
 	ts       curve.TermStructure
 	maturity float64
@@ -14,6 +15,7 @@ type Swap struct {
 
 var _ curve.FloatingRate = Swap{}
 
+// Compute evaluates the swap rate at a given year fraction.
 func (f Swap) Compute(yf float64) float64 {
 	return (f.discountFactor(yf) - f.discountFactor(yf+f.maturity)) / f.computeSwapFormulaDenominator(yf)
 }
@@ -34,6 +36,7 @@ func (f Swap) discountFactor(yf float64) float64 {
 	return math.Exp(-f.ts.Value(yf) * yf)
 }
 
+// NewSwap returns a new swap rate.
 func NewSwap(ts curve.TermStructure, maturity, period float64) Swap {
 	return Swap{
 		ts:       ts,
