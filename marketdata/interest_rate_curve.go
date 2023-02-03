@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/antonioiubatti93/buckle/curve"
-	"github.com/antonioiubatti93/buckle/termstructure"
 )
 
 type InterestRateCurve struct {
@@ -17,46 +16,16 @@ func (c InterestRateCurve) TermStructure() curve.TermStructure {
 }
 
 func (c *InterestRateCurve) UnmarshalJSON(data []byte) error {
-	var dataPoints map[Tenor]float64
-	if err := json.Unmarshal(data, &dataPoints); err != nil {
+	var ts map[Tenor]float64
+	if err := json.Unmarshal(data, &ts); err != nil {
 		return fmt.Errorf("could not unmarshal data points: %w", err)
 	}
 
-	curve, err := newInterestRateCurve(dataPoints)
+	curve, err := newInterestRateCurve(ts)
 	if err != nil {
 		return fmt.Errorf("could not build interest rate curve from data points: %w", err)
 	}
 	*c = curve
 
 	return nil
-}
-
-func newDiscreteTermStructure(dataPoints map[Tenor]float64) (termstructure.Discrete, error) {
-	tenorValues := make([]termstructure.TenorValue, 0, len(dataPoints))
-	for tenor, value := range dataPoints {
-		yf, err := tenor.YearFraction()
-		if err != nil {
-			return termstructure.Discrete{}, fmt.Errorf("could not interpret tenor: %w", err)
-		}
-
-		tenorValues = append(tenorValues, termstructure.NewTenorValue(yf, value))
-	}
-
-	discrete, err := termstructure.NewDiscrete(tenorValues...)
-	if err != nil {
-		return termstructure.Discrete{}, fmt.Errorf("could not build discrete term structure: %w", err)
-	}
-
-	return discrete, nil
-}
-
-func newInterestRateCurve(dataPoints map[Tenor]float64) (InterestRateCurve, error) {
-	discrete, err := newDiscreteTermStructure(dataPoints)
-	if err != nil {
-		return InterestRateCurve{}, err
-	}
-
-	return InterestRateCurve{
-		termStructure: discrete,
-	}, nil
 }
