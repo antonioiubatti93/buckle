@@ -17,6 +17,7 @@ func main() {
 			"M1": 0.21,
 			"Y1": 0.03
 		},
+		"rate": "Forward",
 		"horizon": "Y1",
 		"spread": 0.01,
 		"compounding": "Simple"

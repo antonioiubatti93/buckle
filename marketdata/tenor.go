@@ -41,3 +41,5 @@ func (t Tenor) YearFraction() (float64, error) {
 		return 0.0, fmt.Errorf("tenor %s not recognized", t)
 	}
 }
+
+type TermStructure map[Tenor]float64

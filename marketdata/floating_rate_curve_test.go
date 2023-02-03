@@ -17,6 +17,7 @@ func Test_FloatingRateData_UnmarshalJSON(t *testing.T) {
 			"M1": 0.01,
 			"Y1": 0.02
 		},
+		"rate": "Forward",
 		"spread": 0.01,
 		"compounding": "Simple",
 		"horizon": "Y5"
