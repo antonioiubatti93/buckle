@@ -24,7 +24,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("forward rate at 1y:", rate.FloatingRate().Compute(1.0))
+	fmt.Println("forward rate at 1y:", rate.Compute(1.0))
 
 	var curve marketdata.InterestRateCurve
 	if err := json.Unmarshal([]byte(`{
